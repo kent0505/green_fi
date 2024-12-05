@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'my_button.dart';
+import 'my_btn.dart';
 
-class DialogWidget extends StatelessWidget {
-  const DialogWidget({
+class Dialogg extends StatelessWidget {
+  const Dialogg({
     super.key,
     required this.title,
     this.onlyClose = false,
@@ -37,7 +37,7 @@ class DialogWidget extends StatelessWidget {
             ),
             const Spacer(),
             if (onlyClose)
-              MyButton(
+              MyBtn(
                 padding: 0,
                 onPressed: () {
                   onPressed;
@@ -61,7 +61,7 @@ class DialogWidget extends StatelessWidget {
               Row(
                 children: [
                   const SizedBox(width: 20),
-                  MyButton(
+                  MyBtn(
                     padding: 0,
                     onPressed: () {
                       Navigator.pop(context);
@@ -81,7 +81,7 @@ class DialogWidget extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  MyButton(
+                  MyBtn(
                     padding: 0,
                     onPressed: () {
                       Navigator.pop(context);

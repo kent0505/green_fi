@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'my_button.dart';
+import 'my_btn.dart';
 
 class TextTitle extends StatelessWidget {
   const TextTitle(
@@ -20,7 +20,7 @@ class TextTitle extends StatelessWidget {
       children: [
         if (back) ...[
           const SizedBox(width: 10),
-          MyButton(
+          MyBtn(
             onPressed: () {
               Navigator.pop(context);
             },
@@ -43,7 +43,7 @@ class TextTitle extends StatelessWidget {
           ),
         ),
         if (onDelete != null) ...[
-          MyButton(
+          MyBtn(
             onPressed: onDelete,
             minSize: 26,
             child: const Icon(

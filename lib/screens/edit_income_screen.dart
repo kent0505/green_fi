@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/cash/cash_bloc.dart';
 import '../models/cash.dart';
 import '../widgets/category_button.dart';
-import '../widgets/dialog_widget.dart';
+import '../widgets/dialogg.dart';
 import '../widgets/field_title.dart';
-import '../widgets/main_button.dart';
+import '../widgets/main_btn.dart';
 import '../widgets/text_title.dart';
-import '../widgets/txt_field.dart';
+import '../widgets/t_field.dart';
 
 class EditIncomeScreen extends StatefulWidget {
   const EditIncomeScreen({
@@ -56,7 +56,7 @@ class _EditIncomeScreenState extends State<EditIncomeScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        return DialogWidget(
+        return Dialogg(
           title: 'Delete Income?',
           onPressed: () {
             context.read<CashBloc>().add(DeleteCash(cash: widget.cash));
@@ -144,7 +144,7 @@ class _EditIncomeScreenState extends State<EditIncomeScreen> {
           const SizedBox(height: 24),
           const FieldTitle('Income description'),
           const SizedBox(height: 6),
-          TxtField(
+          TField(
             controller: controller1,
             hintText: 'Title',
             onChanged: checkActive,
@@ -152,7 +152,7 @@ class _EditIncomeScreenState extends State<EditIncomeScreen> {
           const SizedBox(height: 20),
           const FieldTitle('Income Amount'),
           const SizedBox(height: 6),
-          TxtField(
+          TField(
             controller: controller2,
             hintText: '\$5000',
             number: true,
@@ -160,7 +160,7 @@ class _EditIncomeScreenState extends State<EditIncomeScreen> {
             onChanged: checkActive,
           ),
           const SizedBox(height: 10),
-          MainButton(
+          MainBtn(
             title: 'Edit income',
             isActive: isActive,
             onPressed: onEdit,

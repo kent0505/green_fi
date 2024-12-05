@@ -7,9 +7,9 @@ import '../utils.dart';
 import '../models/cash.dart';
 import '../widgets/category_button.dart';
 import '../widgets/field_title.dart';
-import '../widgets/main_button.dart';
+import '../widgets/main_btn.dart';
 import '../widgets/text_title.dart';
-import '../widgets/txt_field.dart';
+import '../widgets/t_field.dart';
 
 class IncomeScreen extends StatefulWidget {
   const IncomeScreen({super.key});
@@ -39,7 +39,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
       category: controller3.text,
     );
     context.read<CashBloc>().add(AddCash(cash: cash));
-    context.read<NavBloc>().add(ChangePage(index: 1));
+    context.read<NavBloc>().add(ChangePage(i: 1));
   }
 
   void onCategory(String value) {
@@ -109,7 +109,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
         const SizedBox(height: 24),
         const FieldTitle('Income description'),
         const SizedBox(height: 6),
-        TxtField(
+        TField(
           controller: controller1,
           hintText: 'Title',
           onChanged: checkActive,
@@ -117,7 +117,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
         const SizedBox(height: 20),
         const FieldTitle('Income Amount'),
         const SizedBox(height: 6),
-        TxtField(
+        TField(
           controller: controller2,
           hintText: '\$5000',
           number: true,
@@ -125,7 +125,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
           onChanged: checkActive,
         ),
         const SizedBox(height: 10),
-        MainButton(
+        MainBtn(
           title: 'Add income',
           isActive: isActive,
           onPressed: onAdd,

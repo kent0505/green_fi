@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class TxtField extends StatefulWidget {
-  const TxtField({
+class TField extends StatefulWidget {
+  const TField({
     super.key,
     required this.controller,
     required this.hintText,
@@ -18,17 +18,10 @@ class TxtField extends StatefulWidget {
   final void Function() onChanged;
 
   @override
-  State<TxtField> createState() => _TxtFieldState();
+  State<TField> createState() => _TFieldState();
 }
 
-class _TxtFieldState extends State<TxtField> {
-  List<TextInputFormatter>? inputFormatters() {
-    final length = LengthLimitingTextInputFormatter(widget.length);
-    final digit = FilteringTextInputFormatter.digitsOnly;
-    if (widget.number) return [length, digit];
-    return [length];
-  }
-
+class _TFieldState extends State<TField> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +30,10 @@ class _TxtFieldState extends State<TxtField> {
       child: TextField(
         controller: widget.controller,
         keyboardType: widget.number ? TextInputType.number : null,
-        inputFormatters: inputFormatters(),
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(widget.length),
+          if (widget.number) FilteringTextInputFormatter.digitsOnly,
+        ],
         textCapitalization: TextCapitalization.sentences,
         style: const TextStyle(
           color: Colors.white,
@@ -64,12 +60,8 @@ class _TxtFieldState extends State<TxtField> {
             borderSide: const BorderSide(color: Color(0xff4FB84F)),
           ),
         ),
-        onTapOutside: (event) {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        onChanged: (value) {
-          widget.onChanged();
-        },
+        onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+        onChanged: (value) => widget.onChanged(),
       ),
     );
   }

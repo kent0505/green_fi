@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../models/nw.dart';
 import '../widgets/category_button.dart';
-import '../widgets/my_button.dart';
+import '../widgets/my_btn.dart';
 import '../widgets/text_title.dart';
 import 'news_read_screen.dart';
 
@@ -130,6 +130,9 @@ class _Card extends StatelessWidget {
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.cover,
+                errorWidget: (context, url, error) {
+                  return Container();
+                },
               ),
             ),
           ),
@@ -191,7 +194,7 @@ class _Card extends StatelessWidget {
               color: const Color(0xff4FB84F),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: MyButton(
+            child: MyBtn(
               onPressed: () {
                 Navigator.push(
                   context,

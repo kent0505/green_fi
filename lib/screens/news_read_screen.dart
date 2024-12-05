@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:green_fi/widgets/my_button.dart';
-import 'package:green_fi/widgets/svg_widget.dart';
 
 import '../models/nw.dart';
+import '../widgets/my_btn.dart';
+import '../widgets/svgg.dart';
 import '../widgets/text_title.dart';
 
 class NewsReadScreen extends StatelessWidget {
@@ -42,15 +42,17 @@ class NewsReadScreen extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: nw.imageURL,
                       width: MediaQuery.of(context).size.width - 40,
-                      // height: MediaQuery.of(context).size.width - 40,
                       fit: BoxFit.cover,
+                      errorWidget: (context, url, error) {
+                        return Container();
+                      },
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 Row(
                   children: [
-                    MyButton(
+                    MyBtn(
                       onPressed: () {},
                       minSize: 26,
                       child: Container(
@@ -63,7 +65,7 @@ class NewsReadScreen extends StatelessWidget {
                         child: const Row(
                           children: [
                             SizedBox(width: 5),
-                            SvgWidget('assets/like.svg'),
+                            Svgg('assets/like.svg'),
                             SizedBox(width: 10),
                             Text(
                               'Like',
@@ -78,7 +80,7 @@ class NewsReadScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    MyButton(
+                    MyBtn(
                       onPressed: () {},
                       minSize: 26,
                       child: Container(
@@ -91,7 +93,7 @@ class NewsReadScreen extends StatelessWidget {
                         child: const Row(
                           children: [
                             SizedBox(width: 5),
-                            SvgWidget('assets/share.svg'),
+                            Svgg('assets/share.svg'),
                             SizedBox(width: 5),
                             Text(
                               'Share',

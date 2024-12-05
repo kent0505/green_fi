@@ -8,8 +8,8 @@ import '../models/nw.dart';
 import '../models/saving.dart';
 import '../utils.dart';
 import '../widgets/category_button.dart';
-import '../widgets/my_button.dart';
-import '../widgets/svg_widget.dart';
+import '../widgets/my_btn.dart';
+import '../widgets/svgg.dart';
 import '../widgets/text_title.dart';
 import 'history_screen.dart';
 import 'my_saving_screen.dart';
@@ -165,7 +165,7 @@ class _BalanceCard extends StatelessWidget {
               ],
             ),
           ),
-          const SvgWidget('assets/balance.svg'),
+          const Svgg('assets/balance.svg'),
           const SizedBox(width: 30),
         ],
       ),
@@ -203,8 +203,8 @@ class _TaskManagerCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Center(
-                    child: SvgWidget(
-                        income ? 'assets/task2.svg' : 'assets/task.svg'),
+                    child:
+                        Svgg(income ? 'assets/task2.svg' : 'assets/task.svg'),
                   ),
                 ),
                 const SizedBox(width: 4),
@@ -287,7 +287,7 @@ class _SeeAll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyButton(
+    return MyBtn(
       onPressed: () {
         Navigator.push(
           context,
@@ -342,7 +342,7 @@ class _News extends StatelessWidget {
         color: const Color(0xff1C1C1E),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: MyButton(
+      child: MyBtn(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(
             builder: (context) {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../widgets/main_button.dart';
-import '../widgets/my_button.dart';
-import '../widgets/svg_widget.dart';
+import '../widgets/main_btn.dart';
+import '../widgets/my_btn.dart';
+import '../widgets/svgg.dart';
 import 'home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -35,7 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           Expanded(
             child: index == 3
-                ? const SvgWidget('assets/o3.svg')
+                ? const Svgg('assets/o3.svg')
                 : Image.asset('assets/o$index.png'),
           ),
           Container(
@@ -89,7 +89,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ],
                 const Spacer(),
-                MainButton(
+                MainBtn(
                   title: 'Continue',
                   onPressed: () async {
                     if (index == 3) {
@@ -117,7 +117,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   },
                 ),
                 const SizedBox(height: 20),
-                MyButton(
+                MyBtn(
                   onPressed: () {},
                   minSize: 20,
                   child: const Text(

@@ -6,8 +6,8 @@ import '../bloc/saving/saving_bloc.dart';
 import '../models/saving.dart';
 import '../utils.dart';
 import '../widgets/empty_widget.dart';
-import '../widgets/my_button.dart';
-import '../widgets/svg_widget.dart';
+import '../widgets/my_btn.dart';
+import '../widgets/svgg.dart';
 import '../widgets/text_title.dart';
 
 class MySavingsScreen extends StatelessWidget {
@@ -70,14 +70,13 @@ class _SavingCard extends StatelessWidget {
         color: const Color(0xff1C1C1E),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: MyButton(
+      child: MyBtn(
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
                 return MySavingScreen(saving: saving);
-                // return Container();
               },
             ),
           );
@@ -93,7 +92,7 @@ class _SavingCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const Center(
-                child: SvgWidget('assets/saving.svg'),
+                child: Svgg('assets/saving.svg'),
               ),
             ),
             const SizedBox(width: 10),

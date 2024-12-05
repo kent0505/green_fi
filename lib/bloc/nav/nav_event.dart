@@ -4,6 +4,6 @@ part of 'nav_bloc.dart';
 sealed class NavEvent {}
 
 class ChangePage extends NavEvent {
-  ChangePage({required this.index});
-  final int index;
+  ChangePage({required this.i});
+  final int i;
 }

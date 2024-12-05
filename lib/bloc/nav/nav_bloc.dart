@@ -17,9 +17,9 @@ class NavBloc extends Bloc<NavEvent, NavState> {
     ChangePage event,
     Emitter<NavState> emit,
   ) {
-    if (event.index == 1) emit(NavInitial());
-    if (event.index == 2) emit(NavIncome());
-    if (event.index == 3) emit(NavNews());
-    if (event.index == 4) emit(NavGame());
+    if (event.i == 1) emit(NavInitial());
+    if (event.i == 2) emit(NavIncome());
+    if (event.i == 3) emit(NavNews());
+    if (event.i == 4) emit(NavGame());
   }
 }

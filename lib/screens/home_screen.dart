@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/nav/nav_bloc.dart';
 import '../utils.dart';
-import '../widgets/my_button.dart';
-import '../widgets/svg_widget.dart';
+import '../widgets/my_btn.dart';
+import '../widgets/svgg.dart';
 import 'initial_screen.dart';
 import 'income_screen.dart';
 import 'news_screen.dart';
@@ -22,29 +22,24 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(bottom: navbarHeight),
             child: BlocConsumer<NavBloc, NavState>(
-              listener: (context, state) {
-                print(state.runtimeType);
-              },
+              listener: (context, state) => print(state.runtimeType),
               builder: (context, state) {
                 if (state is NavIncome) return const IncomeScreen();
-
                 if (state is NavNews) return const NewsScreen();
-
                 if (state is NavGame) return const GameScreen();
-
                 return const InitialScreen();
               },
             ),
           ),
-          const _NavBar(),
+          const BottomNav(),
         ],
       ),
     );
   }
 }
 
-class _NavBar extends StatelessWidget {
-  const _NavBar();
+class BottomNav extends StatelessWidget {
+  const BottomNav({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,22 +56,22 @@ class _NavBar extends StatelessWidget {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _NavBarButton(
+                _NavButton(
                   id: 1,
                   title: 'Home',
                   active: state is NavInitial,
                 ),
-                _NavBarButton(
+                _NavButton(
                   id: 2,
                   title: 'Income',
                   active: state is NavIncome,
                 ),
-                _NavBarButton(
+                _NavButton(
                   id: 3,
                   title: 'News',
                   active: state is NavNews,
                 ),
-                _NavBarButton(
+                _NavButton(
                   id: 4,
                   title: 'Game',
                   active: state is NavGame,
@@ -90,8 +85,8 @@ class _NavBar extends StatelessWidget {
   }
 }
 
-class _NavBarButton extends StatelessWidget {
-  const _NavBarButton({
+class _NavButton extends StatelessWidget {
+  const _NavButton({
     required this.id,
     required this.title,
     required this.active,
@@ -103,11 +98,15 @@ class _NavBarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyButton(
+    return MyBtn(
       onPressed: active
           ? null
           : () {
-              context.read<NavBloc>().add(ChangePage(index: id));
+              context.read<NavBloc>().add(
+                    ChangePage(
+                      i: id,
+                    ),
+                  );
             },
       padding: 0,
       child: SizedBox(
@@ -116,14 +115,14 @@ class _NavBarButton extends StatelessWidget {
           children: [
             const SizedBox(height: 18),
             Container(
-              height: 30,
               width: 30,
+              height: 30,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: active ? const Color(0xff4FB84F).withOpacity(0.2) : null,
               ),
               child: Center(
-                child: SvgWidget(
+                child: Svgg(
                   'assets/$id.svg',
                   color: active ? const Color(0xff4FB84F) : Colors.white,
                 ),

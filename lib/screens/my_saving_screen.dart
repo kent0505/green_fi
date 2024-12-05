@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/saving/saving_bloc.dart';
 import '../models/saving.dart';
 import '../utils.dart';
-import '../widgets/dialog_widget.dart';
+import '../widgets/dialogg.dart';
 import '../widgets/field_title.dart';
-import '../widgets/main_button.dart';
-import '../widgets/my_button.dart';
+import '../widgets/main_btn.dart';
+import '../widgets/my_btn.dart';
 import '../widgets/text_title.dart';
-import '../widgets/txt_field.dart';
+import '../widgets/t_field.dart';
 
 class MySavingScreen extends StatefulWidget {
   const MySavingScreen({
@@ -58,7 +58,7 @@ class _MySavingScreenState extends State<MySavingScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        return DialogWidget(
+        return Dialogg(
           title: 'Delete Saving?',
           onPressed: () {
             context.read<SavingBloc>().add(DeleteSaving(saving: widget.saving));
@@ -130,7 +130,7 @@ class _MySavingScreenState extends State<MySavingScreen> {
                 const SizedBox(height: 20),
                 const FieldTitle('Amount'),
                 const SizedBox(height: 6),
-                TxtField(
+                TField(
                   controller: controller2,
                   hintText: '\$5000',
                   number: true,
@@ -138,7 +138,7 @@ class _MySavingScreenState extends State<MySavingScreen> {
                   onChanged: checkActive,
                 ),
                 const SizedBox(height: 10),
-                MainButton(
+                MainBtn(
                   title: 'Save',
                   isActive: isActive,
                   onPressed: onSave,
@@ -210,7 +210,7 @@ class _CategoryState extends State<_Category> {
               color: const Color(0xff4FB84F),
             ),
           ),
-          child: MyButton(
+          child: MyBtn(
             onPressed: () {
               setState(() {
                 expanded = !expanded;
@@ -284,7 +284,7 @@ class _CategoryText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyButton(
+    return MyBtn(
       onPressed: () {
         onSelect(category);
       },

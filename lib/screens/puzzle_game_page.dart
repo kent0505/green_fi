@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/dialog_widget.dart';
-import '../widgets/main_button.dart';
-import '../widgets/my_button.dart';
+import '../widgets/dialogg.dart';
+import '../widgets/main_btn.dart';
+import '../widgets/my_btn.dart';
 import '../widgets/score_card.dart';
 import '../widgets/text_title.dart';
 
@@ -59,25 +59,25 @@ class _PuzzleGamePageState extends State<PuzzleGamePage> {
   void _checkWinCondition() async {
     final winningTiles = List.generate(15, (index) => index + 1)..add(0);
     if (listEquals(_tiles, winningTiles)) {
-      await showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return DialogWidget(
-            title: 'You win!',
-            onlyClose: true,
-            onPressed: () {},
-          );
-        },
-      ).then((value) {
-        if (gameIndex == 4) {
+      if (gameIndex == 4) {
+        await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            return Dialogg(
+              title: 'You win!',
+              onlyClose: true,
+              onPressed: () {},
+            );
+          },
+        ).then((value) {
           if (mounted) Navigator.pop(context);
-        } else {
-          setState(() {
-            isActive = true;
-          });
-        }
-      });
+        });
+      } else {
+        setState(() {
+          isActive = true;
+        });
+      }
     }
   }
 
@@ -121,7 +121,7 @@ class _PuzzleGamePageState extends State<PuzzleGamePage> {
                     left: col * tileSize,
                     top: row * tileSize,
                     duration: const Duration(milliseconds: 300),
-                    child: MyButton(
+                    child: MyBtn(
                       onPressed: () => _moveTile(index),
                       child: Container(
                         width: tileSize,
@@ -136,7 +136,7 @@ class _PuzzleGamePageState extends State<PuzzleGamePage> {
             ),
           ),
           const Spacer(),
-          MainButton(
+          MainBtn(
             title: 'Next',
             isActive: isActive,
             onPressed: () {

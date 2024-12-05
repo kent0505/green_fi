@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/answer.dart';
-import 'my_button.dart';
+import 'my_btn.dart';
 
 class AnswerCard extends StatelessWidget {
   const AnswerCard({
@@ -29,7 +29,7 @@ class AnswerCard extends StatelessWidget {
           color: const Color(0xff4FB84F),
         ),
       ),
-      child: MyButton(
+      child: MyBtn(
         onPressed: answer == current
             ? null
             : () {

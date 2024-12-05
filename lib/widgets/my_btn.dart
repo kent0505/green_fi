@@ -15,8 +15,8 @@ const cupertinoTheme = CupertinoThemeData(
   ),
 );
 
-class MyButton extends StatelessWidget {
-  const MyButton({
+class MyBtn extends StatelessWidget {
+  const MyBtn({
     super.key,
     this.onPressed,
     this.padding = 0,

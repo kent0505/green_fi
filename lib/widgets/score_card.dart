@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/cash/cash_bloc.dart';
 import '../utils.dart';
-import 'svg_widget.dart';
+import 'svgg.dart';
 
 class ScoreCard extends StatelessWidget {
   const ScoreCard({super.key});
@@ -20,7 +20,7 @@ class ScoreCard extends StatelessWidget {
       child: Row(
         children: [
           const SizedBox(width: 20),
-          const SvgWidget('assets/score.svg'),
+          const Svgg('assets/score.svg'),
           Expanded(
             child: Center(
               child: BlocBuilder<CashBloc, CashState>(
@@ -37,7 +37,7 @@ class ScoreCard extends StatelessWidget {
               ),
             ),
           ),
-          const SvgWidget('assets/score.svg'),
+          const Svgg('assets/score.svg'),
           const SizedBox(width: 20),
         ],
       ),

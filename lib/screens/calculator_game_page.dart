@@ -5,12 +5,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/cash/cash_bloc.dart';
 import '../models/calc.dart';
 import '../utils.dart';
-import '../widgets/dialog_widget.dart';
+import '../widgets/dialogg.dart';
 import '../widgets/field_title.dart';
-import '../widgets/main_button.dart';
+import '../widgets/main_btn.dart';
 import '../widgets/score_card.dart';
 import '../widgets/text_title.dart';
-import '../widgets/txt_field.dart';
+import '../widgets/t_field.dart';
 
 class CalculatorGamePage extends StatefulWidget {
   const CalculatorGamePage({super.key});
@@ -44,7 +44,7 @@ class _CalculatorGamePageState extends State<CalculatorGamePage> {
           context: context,
           barrierDismissible: false,
           builder: (context) {
-            return DialogWidget(
+            return Dialogg(
               title: 'Correct: $correctAnswers',
               onlyClose: true,
               onPressed: () {},
@@ -117,7 +117,7 @@ class _CalculatorGamePageState extends State<CalculatorGamePage> {
           const SizedBox(height: 15),
           const FieldTitle('Enter your answer'),
           const SizedBox(height: 6),
-          TxtField(
+          TField(
             controller: controller,
             hintText: '0',
             number: true,
@@ -126,9 +126,8 @@ class _CalculatorGamePageState extends State<CalculatorGamePage> {
               setState(() {});
             },
           ),
-          // const SizedBox(height: 212),
           const Spacer(),
-          MainButton(
+          MainBtn(
             title: 'Check Answer',
             isActive: controller.text.isNotEmpty,
             onPressed: onCheck,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/my_button.dart';
+import '../widgets/my_btn.dart';
 import '../widgets/score_card.dart';
-import '../widgets/svg_widget.dart';
+import '../widgets/svgg.dart';
 import '../widgets/text_title.dart';
 import 'calculator_game_page.dart';
 import 'currency_game_screen.dart';
@@ -95,7 +95,7 @@ class _Game extends StatelessWidget {
           color: borderColor,
         ),
       ),
-      child: MyButton(
+      child: MyBtn(
         onPressed: () {
           Navigator.push(
             context,
@@ -121,7 +121,7 @@ class _Game extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Center(
-                        child: SvgWidget(
+                        child: Svgg(
                           'assets/game.svg',
                           color: borderColor,
                         ),

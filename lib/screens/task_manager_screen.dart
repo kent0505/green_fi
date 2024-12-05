@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:green_fi/widgets/main_button.dart';
+import 'package:green_fi/widgets/main_btn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../widgets/my_button.dart';
+import '../widgets/my_btn.dart';
 import '../widgets/text_title.dart';
 
 class TaskManagerScreen extends StatefulWidget {
@@ -183,7 +183,7 @@ class _TaskManagerScreenState extends State<TaskManagerScreen> {
                   ],
                 ),
                 const SizedBox(height: 22),
-                MainButton(
+                MainBtn(
                   title: 'Accept',
                   onPressed: () {
                     Navigator.pop(context);
@@ -260,7 +260,7 @@ class _Tile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
-      child: MyButton(
+      child: MyBtn(
         onPressed: () {
           onPressed(id);
         },

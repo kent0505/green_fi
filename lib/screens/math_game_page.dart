@@ -7,9 +7,9 @@ import '../models/answer.dart';
 import '../models/math_quiz.dart';
 import '../utils.dart';
 import '../widgets/answer_card.dart';
-import '../widgets/dialog_widget.dart';
+import '../widgets/dialogg.dart';
 import '../widgets/field_title.dart';
-import '../widgets/main_button.dart';
+import '../widgets/main_btn.dart';
 import '../widgets/score_card.dart';
 import '../widgets/text_title.dart';
 
@@ -52,7 +52,7 @@ class _MathGamePageState extends State<MathGamePage> {
           context: context,
           barrierDismissible: false,
           builder: (context) {
-            return DialogWidget(
+            return Dialogg(
               title: 'Correct: $correctAnswers',
               onlyClose: true,
               onPressed: () {},
@@ -163,7 +163,7 @@ class _MathGamePageState extends State<MathGamePage> {
             onPressed: onAnswer,
           ),
           const SizedBox(height: 24),
-          MainButton(
+          MainBtn(
             title: 'Answer',
             isActive: selectedAnswer.answer.isNotEmpty,
             onPressed: onCheck,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'my_button.dart';
+import 'my_btn.dart';
 
 class CategoryButton extends StatelessWidget {
   const CategoryButton({
@@ -17,7 +17,7 @@ class CategoryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: MyButton(
+      child: MyBtn(
         onPressed: onPressed,
         minSize: 26,
         child: Container(

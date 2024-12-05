@@ -5,7 +5,7 @@ import '../bloc/cash/cash_bloc.dart';
 import '../models/cash.dart';
 import '../utils.dart';
 import '../widgets/empty_widget.dart';
-import '../widgets/my_button.dart';
+import '../widgets/my_btn.dart';
 import '../widgets/text_title.dart';
 import 'edit_income_screen.dart';
 
@@ -69,7 +69,7 @@ class _CashCard extends StatelessWidget {
         color: const Color(0xff1C1C1E),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: MyButton(
+      child: MyBtn(
         onPressed: () {
           Navigator.push(
             context,

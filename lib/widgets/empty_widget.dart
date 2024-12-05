@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'svg_widget.dart';
+import 'svgg.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({super.key});
@@ -11,7 +11,7 @@ class EmptyWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgWidget('assets/empty.svg'),
+          Svgg('assets/empty.svg'),
           SizedBox(height: 60),
           Text(
             'No information on income yet',
