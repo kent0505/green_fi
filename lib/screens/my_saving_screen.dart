@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/saving/saving_bloc.dart';
+import '../models/saving.dart';
+import '../utils.dart';
 import '../widgets/field_title.dart';
 import '../widgets/main_button.dart';
 import '../widgets/my_button.dart';
@@ -26,12 +30,24 @@ class _MySavingScreenState extends State<MySavingScreen> {
   }
 
   void onSave() async {
+    final saving = Saving(
+      id: getTimestamp(),
+      category: controller1.text,
+      amount: int.parse(controller2.text),
+    );
+    context.read<SavingBloc>().add(AddSaving(saving: saving));
     if (mounted) Navigator.pop(context);
   }
 
   void onSelect(String value) {
     controller1.text = value;
     checkActive();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller1.text = 'Short-term investments';
   }
 
   @override

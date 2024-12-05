@@ -22,6 +22,7 @@ class SavingBloc extends Bloc<SavingEvent, SavingState> {
   }
 
   void _getSavings(GetSaving event, Emitter<SavingState> emit) async {
+    await _database.init();
     List<Saving> savings = await _database.getSavings();
     emit(SavingLoaded(savings: savings));
   }

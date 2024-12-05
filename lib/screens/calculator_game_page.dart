@@ -126,12 +126,14 @@ class _CalculatorGamePageState extends State<CalculatorGamePage> {
               setState(() {});
             },
           ),
-          const SizedBox(height: 212),
+          // const SizedBox(height: 212),
+          const Spacer(),
           MainButton(
             title: 'Check Answer',
             isActive: controller.text.isNotEmpty,
             onPressed: onCheck,
           ),
+          const SizedBox(height: 96),
         ],
       ),
     );

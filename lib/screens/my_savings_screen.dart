@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/cash/cash_bloc.dart';
-import '../models/cash.dart';
+import '../bloc/saving/saving_bloc.dart';
+import '../models/saving.dart';
 import '../utils.dart';
 import '../widgets/empty_widget.dart';
 import '../widgets/my_button.dart';
+import '../widgets/svg_widget.dart';
 import '../widgets/text_title.dart';
-import 'edit_income_screen.dart';
 
-class HistoryScreen extends StatelessWidget {
-  const HistoryScreen({super.key});
+class MySavingsScreen extends StatelessWidget {
+  const MySavingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,21 +20,21 @@ class HistoryScreen extends StatelessWidget {
           SizedBox(height: MediaQuery.of(context).viewPadding.top),
           const SizedBox(
             height: 60,
-            child: TextTitle('History', back: true),
+            child: TextTitle('My savings', back: true),
           ),
-          BlocBuilder<CashBloc, CashState>(
+          BlocBuilder<SavingBloc, SavingState>(
             builder: (context, state) {
-              if (state is CashLoaded) {
-                if (state.cashes.isEmpty) {
+              if (state is SavingLoaded) {
+                if (state.savings.isEmpty) {
                   return const EmptyWidget();
                 }
 
                 return Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    itemCount: state.cashes.length,
+                    itemCount: state.savings.length,
                     itemBuilder: (context, index) {
-                      return _CashCard(cash: state.cashes[index]);
+                      return _SavingCard(saving: state.savings[index]);
                     },
                   ),
                 );
@@ -49,12 +49,12 @@ class HistoryScreen extends StatelessWidget {
   }
 }
 
-class _CashCard extends StatelessWidget {
-  const _CashCard({
-    required this.cash,
+class _SavingCard extends StatelessWidget {
+  const _SavingCard({
+    required this.saving,
   });
 
-  final Cash cash;
+  final Saving saving;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,8 @@ class _CashCard extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return EditIncomeScreen(cash: cash);
+                // return EditIncomeScreen(cash: cash);
+                return Container();
               },
             ),
           );
@@ -87,14 +88,11 @@ class _CashCard extends StatelessWidget {
               height: 48,
               width: 48,
               decoration: BoxDecoration(
+                color: const Color(0xff4FB84F).withOpacity(0.2),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  width: 1,
-                  color: const Color(0xff4FB84F),
-                ),
-                image: const DecorationImage(
-                  image: AssetImage('assets/income.png'),
-                ),
+              ),
+              child: const Center(
+                child: SvgWidget('assets/saving.svg'),
               ),
             ),
             const SizedBox(width: 10),
@@ -104,7 +102,7 @@ class _CashCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    cash.title,
+                    saving.category,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -115,7 +113,7 @@ class _CashCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        formatTimestamp(cash.id),
+                        formatTimestamp(saving.id),
                         style: const TextStyle(
                           color: Color(0xff939393),
                           fontSize: 10,
@@ -132,7 +130,7 @@ class _CashCard extends StatelessWidget {
                         ),
                         child: const Center(
                           child: Text(
-                            'Income',
+                            'Saving',
                             style: TextStyle(
                               color: Color(0xff4FB84F),
                               fontSize: 10,
@@ -148,7 +146,7 @@ class _CashCard extends StatelessWidget {
               ),
             ),
             Text(
-              '+${cash.amount} \$',
+              '+${saving.amount} \$',
               style: const TextStyle(
                 color: Color(0xff4FB84F),
                 fontSize: 12,

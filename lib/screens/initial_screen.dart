@@ -6,6 +6,8 @@ import '../widgets/svg_widget.dart';
 import '../widgets/text_title.dart';
 import 'history_screen.dart';
 import 'my_saving_screen.dart';
+import 'my_savings_screen.dart';
+import 'task_manager_screen.dart';
 
 class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
@@ -25,7 +27,16 @@ class InitialScreen extends StatelessWidget {
             CategoryButton(
               title: 'Transactions',
               current: 'Transactions',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const MySavingsScreen();
+                    },
+                  ),
+                );
+              },
             ),
             const SizedBox(width: 16),
             CategoryButton(
@@ -249,8 +260,15 @@ class _SeeAll extends StatelessWidget {
   Widget build(BuildContext context) {
     return MyButton(
       onPressed: () {
-        if (income) {
-        } else {}
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              if (income) return const HistoryScreen();
+              return const TaskManagerScreen();
+            },
+          ),
+        );
       },
       minSize: 28,
       child: Container(
