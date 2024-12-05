@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:green_fi/screens/my_saving_screen.dart';
 
 import '../bloc/saving/saving_bloc.dart';
 import '../models/saving.dart';
@@ -75,8 +76,8 @@ class _SavingCard extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                // return EditIncomeScreen(cash: cash);
-                return Container();
+                return MySavingScreen(saving: saving);
+                // return Container();
               },
             ),
           );

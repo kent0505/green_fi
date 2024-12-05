@@ -33,7 +33,14 @@ class Db {
 
   Future<List<Cash>> getCashes() async {
     final List<Map<String, dynamic>> maps = await _db.query('cash');
-    return List.generate(maps.length, (index) => Cash.fromMap(maps[index]));
+    final cashes =
+        List.generate(maps.length, (index) => Cash.fromMap(maps[index]));
+    int data = 0;
+    for (Cash cash in cashes) {
+      data += cash.amount;
+    }
+    totalIncomes = data;
+    return cashes;
   }
 
   Future<List<Cash>> addCash(Cash cash) async {
@@ -66,7 +73,15 @@ class Db {
 
   Future<List<Saving>> getSavings() async {
     final List<Map<String, dynamic>> maps = await _db.query('saving');
-    return List.generate(maps.length, (index) => Saving.fromMap(maps[index]));
+    final savings =
+        List.generate(maps.length, (index) => Saving.fromMap(maps[index]));
+    int data = 0;
+    for (Saving saving in savings) {
+      data += saving.amount;
+    }
+    currentBalance = data;
+    currentBalance += totalIncomes;
+    return savings;
   }
 
   Future<List<Saving>> addSaving(Saving saving) async {

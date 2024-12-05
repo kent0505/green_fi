@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 double navbarHeight = 86;
 bool onboarding = true;
 int score = 0;
+int totalIncomes = 0;
+int currentBalance = 0;
 
 int getTimestamp() => DateTime.now().millisecondsSinceEpoch ~/ 1000;
 

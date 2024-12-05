@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/saving/saving_bloc.dart';
 import '../models/saving.dart';
 import '../utils.dart';
+import '../widgets/dialog_widget.dart';
 import '../widgets/field_title.dart';
 import '../widgets/main_button.dart';
 import '../widgets/my_button.dart';
@@ -11,7 +12,12 @@ import '../widgets/text_title.dart';
 import '../widgets/txt_field.dart';
 
 class MySavingScreen extends StatefulWidget {
-  const MySavingScreen({super.key});
+  const MySavingScreen({
+    super.key,
+    required this.saving,
+  });
+
+  final Saving saving;
 
   @override
   State<MySavingScreen> createState() => _MySavingScreenState();
@@ -31,11 +37,15 @@ class _MySavingScreenState extends State<MySavingScreen> {
 
   void onSave() async {
     final saving = Saving(
-      id: getTimestamp(),
+      id: widget.saving.id == 0 ? getTimestamp() : widget.saving.id,
       category: controller1.text,
       amount: int.parse(controller2.text),
     );
-    context.read<SavingBloc>().add(AddSaving(saving: saving));
+    context.read<SavingBloc>().add(
+          widget.saving.id == 0
+              ? AddSaving(saving: saving)
+              : EditSaving(saving: saving),
+        );
     if (mounted) Navigator.pop(context);
   }
 
@@ -44,10 +54,31 @@ class _MySavingScreenState extends State<MySavingScreen> {
     checkActive();
   }
 
+  void onDelete() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogWidget(
+          title: 'Delete Saving?',
+          onPressed: () {
+            context.read<SavingBloc>().add(DeleteSaving(saving: widget.saving));
+            Navigator.pop(context);
+          },
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
-    controller1.text = 'Short-term investments';
+    if (widget.saving.id == 0) {
+      controller1.text = 'Short-term investments';
+    } else {
+      controller1.text = widget.saving.category;
+      controller2.text = widget.saving.amount.toString();
+      isActive = true;
+    }
   }
 
   @override
@@ -63,9 +94,13 @@ class _MySavingScreenState extends State<MySavingScreen> {
       body: Column(
         children: [
           SizedBox(height: MediaQuery.of(context).viewPadding.top),
-          const SizedBox(
+          SizedBox(
             height: 60,
-            child: TextTitle('My saving', back: true),
+            child: TextTitle(
+              'My saving',
+              back: true,
+              onDelete: widget.saving.id == 0 ? null : onDelete,
+            ),
           ),
           Expanded(
             child: ListView(

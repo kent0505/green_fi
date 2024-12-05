@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/cash/cash_bloc.dart';
+import '../bloc/saving/saving_bloc.dart';
+import '../models/saving.dart';
+import '../utils.dart';
 import '../widgets/category_button.dart';
 import '../widgets/my_button.dart';
 import '../widgets/svg_widget.dart';
@@ -14,7 +19,8 @@ class InitialScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      padding: EdgeInsets.zero,
       children: [
         SizedBox(height: 34 + MediaQuery.of(context).viewPadding.top),
         const TextTitle('Home'),
@@ -47,7 +53,13 @@ class InitialScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return const MySavingScreen();
+                      return MySavingScreen(
+                        saving: Saving(
+                          id: 0,
+                          category: '',
+                          amount: 0,
+                        ),
+                      );
                     },
                   ),
                 );
@@ -86,7 +98,8 @@ class InitialScreen extends StatelessWidget {
         const SizedBox(height: 20),
         const TextTitle('News'),
         const SizedBox(height: 20),
-        // 2 news
+        // 2-3 news
+        const SizedBox(height: 20),
       ],
     );
   }
@@ -108,15 +121,15 @@ class _BalanceCard extends StatelessWidget {
           color: const Color(0xff4FB84F),
         ),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          SizedBox(width: 14),
+          const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 28),
-                Text(
+                const SizedBox(height: 28),
+                const Text(
                   'Current Balance',
                   style: TextStyle(
                     color: Color(0xff4FB84F),
@@ -124,20 +137,28 @@ class _BalanceCard extends StatelessWidget {
                     fontFamily: 'w500',
                   ),
                 ),
-                SizedBox(height: 8),
-                Text(
-                  '\$ 1,000.22',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 36,
-                    fontFamily: 'w600',
-                  ),
+                const SizedBox(height: 8),
+                BlocBuilder<CashBloc, CashState>(
+                  builder: (context, state) {
+                    return BlocBuilder<SavingBloc, SavingState>(
+                      builder: (context, state) {
+                        return Text(
+                          '\$ $currentBalance',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 36,
+                            fontFamily: 'w600',
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ],
             ),
           ),
-          SvgWidget('assets/balance.svg'),
-          SizedBox(width: 30),
+          const SvgWidget('assets/balance.svg'),
+          const SizedBox(width: 30),
         ],
       ),
     );
@@ -195,9 +216,9 @@ class _TaskManagerCard extends StatelessWidget {
               children: [
                 const SizedBox(width: 14),
                 if (income)
-                  const Text(
-                    '\$ 145.88',
-                    style: TextStyle(
+                  Text(
+                    '\$ $totalIncomes',
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 28,
                       fontFamily: 'w700',
