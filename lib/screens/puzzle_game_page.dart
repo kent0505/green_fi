@@ -19,6 +19,8 @@ class PuzzleGamePage extends StatefulWidget {
 class _PuzzleGamePageState extends State<PuzzleGamePage> {
   final List<int> _tiles = List.generate(15, (index) => index + 1)..add(0);
   int emptyIndex = 15;
+  int gameIndex = 1;
+  bool isActive = false;
 
   @override
   void initState() {
@@ -68,11 +70,23 @@ class _PuzzleGamePageState extends State<PuzzleGamePage> {
           );
         },
       ).then((value) {
-        setState(() {
-          _shuffle();
-        });
+        if (gameIndex == 4) {
+          if (mounted) Navigator.pop(context);
+        } else {
+          setState(() {
+            isActive = true;
+          });
+        }
       });
     }
+  }
+
+  String getImage(int id) {
+    if (gameIndex == 1) return 'assets/g$id.png';
+    if (gameIndex == 2) return 'assets/gg$id.png';
+    if (gameIndex == 3) return 'assets/ggg$id.png';
+    if (gameIndex == 4) return 'assets/gggg$id.png';
+    return 'assets/g$id.png';
   }
 
   @override
@@ -90,7 +104,7 @@ class _PuzzleGamePageState extends State<PuzzleGamePage> {
           ),
           const SizedBox(height: 4),
           const ScoreCard(),
-          const SizedBox(height: 15),
+          const Spacer(),
           Center(
             child: SizedBox(
               width: containerSize,
@@ -112,17 +126,8 @@ class _PuzzleGamePageState extends State<PuzzleGamePage> {
                       child: Container(
                         width: tileSize,
                         height: tileSize,
-                        color: Colors.redAccent,
-                        child: Center(
-                          child: Text(
-                            '$tile',
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                        padding: const EdgeInsets.all(5),
+                        child: tile > 0 ? Image.asset(getImage(tile)) : null,
                       ),
                     ),
                   );
@@ -133,8 +138,13 @@ class _PuzzleGamePageState extends State<PuzzleGamePage> {
           const Spacer(),
           MainButton(
             title: 'Next',
-            // isActive: controller.text.isNotEmpty,
-            onPressed: () {},
+            isActive: isActive,
+            onPressed: () {
+              setState(() {
+                gameIndex++;
+                _shuffle();
+              });
+            },
           ),
           const SizedBox(height: 96),
         ],
